@@ -1,6 +1,6 @@
 # Jubelo-Pick-Up
 
-![Icon](https://github.com/ucupofcoffee/Jubelo-Pick-Up/truck-container.png)
+![Icon](https://raw.githubusercontent.com/ucupofcoffee/Jubelo-Pick-Up/main/truck-container.png)
 
 ## Cara Penggunaan
 
