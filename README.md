@@ -6,7 +6,7 @@
 
 Berikut langkah-langkah untuk memulai menggunakan aplikasi ini:
 1. ""Clone Repository**
-   git clone https://github.com/username/Nama_Aplikasi.git
+   git clone [https://github.com/username/Nama_Aplikasi.git](https://github.com/ucupofcoffee/Jubelo-Pick-Up.git)
 2. **Install Dependencies Menggunakan Composer**
    composer install
 4. **JalankanServer Lokal Menggunakan PHP Artisan**
