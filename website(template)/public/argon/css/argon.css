@@ -1924,21 +1924,21 @@ pre code
 
     vertical-align: top;
 
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid #E9ECEF;
 }
 .table thead th
 {
     vertical-align: bottom;
 
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid #E9ECEF;
 }
 .table tbody + tbody
 {
-    border-top: 2px solid #e9ecef;
+    border-top: 2px solid #E9ECEF;
 }
 .table .table
 {
-    background-color: #f8f9fe;
+    background-color: #E9ECEF;
 }
 
 .table-sm th,
@@ -2314,9 +2314,10 @@ pre code
 .table-responsive
 {
     display: block;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 
     width: 100%;
+    height: 100%;
 
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -2974,15 +2975,15 @@ fieldset:disabled a.btn
 .btn-primary
 {
     color: #fff;
-    border-color: #5e72e4;
-    background-color: #5e72e4;
+    border-color: #2236A8;
+    background-color: #2236A8;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 .btn-primary:hover
 {
     color: #fff;
-    border-color: #5e72e4; 
-    background-color: #5e72e4;
+    border-color: #2236A8; 
+    background-color: #2236A8;
 }
 .btn-primary:focus,
 .btn-primary.focus
@@ -15046,7 +15047,7 @@ button.bg-lighter:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+    background: linear-gradient(87deg, #2236A8 0, #5394ff 100%) !important;
 }
 
 .bg-gradient-secondary
@@ -15402,7 +15403,7 @@ button.section-darker:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+    background: linear-gradient(87deg, #2236A8 0, #5394ff 100%) !important;
 }
 
 .bg-gradient-secondary
@@ -21866,4 +21867,20 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     bottom: 0; 
 
     height: 3px;
+}
+
+/* Calendar */
+.fc .fc-toolbar.fc-header-toolbar .fc-button
+{
+    color: #fff;
+    border-color: #2236A8;
+    background-color: #2236A8;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+
+.fc .fc-toolbar.fc-header-toolbar .fc-button:hover
+{
+    color: #fff;
+    border-color: #2236A8; 
+    background-color: #2236A8;
 }
