@@ -42,10 +42,11 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'admins',
+            'driver' => 'sanctum',
+            'provider' => 'drivers',
             'hash' => false,
         ],
+        
     ],
 
     /*
@@ -69,6 +70,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Driver::class,
         ],
 
         // 'users' => [

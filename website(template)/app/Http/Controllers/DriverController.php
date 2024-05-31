@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 
 class DriverController extends Controller
-{
+{ 
     public function index()
     {
         $drivers = Driver::all();
