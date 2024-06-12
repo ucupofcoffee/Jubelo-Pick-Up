@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\History;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\Driver;
 use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
     public function index()
     {
+        $day = Carbon::now()->format('l');
         $today = Carbon::now()->format('l, d F Y');
         $date = Carbon::now()->toDateString();
+        $drivers = Driver::where('day', $day)->get();
 
         $schedule = Schedule::whereDate('pick_up_date', $date)->orderBy('pick_up_time', 'asc')->get();
 
@@ -37,6 +40,7 @@ class ScheduleController extends Controller
 
         return view('schedule.index', [
             'title' => 'Schedule List',
+            'drivers' => $drivers,
             'today' => $today,
             'schedule' => $schedule,
             'pickup1' => $pickup1,

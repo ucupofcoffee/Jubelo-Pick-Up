@@ -7,17 +7,16 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="table-responsive bg-white rounded shadow p-3">
-                    <div class="h4">{{ $today }}</div>
-                    {{-- <div class="row my-4 d-flex justify-content-between">
-                        <div class="col-6">
-                        </div>
-                        <div class="col-6 text-right">
-                            <form action="{{ route('schedule.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <button class="btn btn-primary mx-4" type="submit">Submit</button>
-                            </form>
-                        </div>
-                    </div> --}}
+                    <div class="h4">
+                        {{ $today }}
+                        @if ($drivers->isNotEmpty())
+                            @foreach ($drivers as $driver)
+                                - {{ $driver->name }}
+                            @endforeach
+                        @else
+                            - Tidak ada driver tersedia
+                        @endif
+                    </div>
 
                     @if ($schedule->isNotEmpty())
 

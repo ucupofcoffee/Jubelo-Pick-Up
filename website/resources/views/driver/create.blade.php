@@ -39,6 +39,23 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="day" class="form-label-create">Work Day</label>
+                                        <select class="form-control @error('day') is-invalid @enderror" id="day"
+                                            name="day" required>
+                                            <option value="" disabled selected>Select a day</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
+                                            <option value="Sunday">Sunday</option>
+                                        </select>
+                                        @error('day')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -58,6 +75,17 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label-create">Status</label>
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                            id="phone" name="phone" placeholder="Type driver phone" required
+                                            value="Active" disabled>
+                                        @error('phone')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                 </div>
                             </div>
                         </div>

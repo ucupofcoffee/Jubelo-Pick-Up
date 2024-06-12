@@ -9,6 +9,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +48,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/driver/store', [DriverController::class, 'store'])->name('driver.store');
     Route::get('/driver/edit/{id}', [DriverController::class, 'edit'])->name('driver.edit');
     Route::put('/driver/update/{id}', [DriverController::class, 'update'])->name('driver.update');
-    Route::delete('/driver/delete/{id}', [DriverController::class, 'delete'])->name('driver.delete');
+    Route::put('/driver/delete/{id}', [DriverController::class, 'delete'])->name('driver.delete');
     // Route::get('/location/index', [LocationController::class, 'index'])->name('location.index');
     // Route::post('/location/store', [LocationController::class, 'store'])->name('location.store');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/get-location', function () {
+        $apiKey = 'AIzaSyCyVSNnBSC2inE88KAJEuFNWbtlSyvSbTg';
+        $response = Http::post("https://www.googleapis.com/geolocation/v1/geolocate?key={$apiKey}");
+    
+        return $response->json();
+    });
 });

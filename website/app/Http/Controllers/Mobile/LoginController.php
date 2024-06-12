@@ -18,15 +18,15 @@ class LoginController extends Controller
             'password' => 'required|min:8|max:255',
         ]);
     
-        $credentials = $request->only('email', 'password');
-    
         $driver = Driver::where('email', $request->email)->first();
     
         if (!$driver || !Hash::check($request->password, $driver->password)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
-    
-        Auth::login($driver);
+
+        if ($driver->status !== 'Active') {
+            return response()->json(['error' => 'Driver is not active'], 403);
+        }
     
         $token = $driver->createToken('authToken')->plainTextToken;
     
@@ -35,12 +35,16 @@ class LoginController extends Controller
     
     public function logout(Request $request)
     {
-        Auth::logout();
+        $driver = Auth::guard('api')->user();
 
-        $request->session()->invalidate();
-        
-        $request->session()->regenerateToken();
+        if (!$driver) {
+            return response()->json([
+                'message' => 'Driver not authenticated',
+            ], 401);
+        }
 
-        return redirect()->route('login');
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Logged out'], 200);
     }
 }

@@ -12,7 +12,7 @@ class DriverController extends Controller
 {
     public function index()
     {
-        $drivers = Driver::all();
+        $drivers = Driver::where('status', 'active')->get();
 
         return view('driver.index', [
             'drivers' => $drivers,
@@ -48,6 +48,8 @@ class DriverController extends Controller
             'phone' => 'required|unique:drivers,phone',
             'email' => 'required|email:rfc,dns|unique:drivers,email',
             'password' => 'required|min:8|max:255',
+            'status' => 'required',
+            'day' => 'required',
         ]);
 
         $driver = new Driver();
@@ -106,15 +108,17 @@ class DriverController extends Controller
     public function delete($driverid)
     {
         $driver = Driver::find($driverid);
-
+    
         if ($driver) {
-            if ($driver->delete()) {
-                return redirect()->back()->with('success', 'Driver deleted successfully');
+            $driver->status = 'Deadactive';
+            if ($driver->save()) {
+                return redirect()->back()->with('success', 'Driver status updated to deadactive successfully');
             } else {
-                return redirect()->back()->with('error', 'Failed to delete Driver. Please try again');
+                return redirect()->back()->with('error', 'Failed to update Driver status. Please try again');
             }
         } else {
             return redirect()->back()->with('error', 'Driver not found');
         }
     }
+    
 }

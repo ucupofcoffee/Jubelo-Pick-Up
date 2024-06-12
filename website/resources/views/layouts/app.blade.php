@@ -24,10 +24,18 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css" />
+    {{-- <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css" /> --}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
-
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyVSNnBSC2inE88KAJEuFNWbtlSyvSbTg&callback=initMap"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body class="{{ $class ?? '' }}">
@@ -49,7 +57,7 @@
 
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.js"></script> --}}
 
 
     @stack('js')
