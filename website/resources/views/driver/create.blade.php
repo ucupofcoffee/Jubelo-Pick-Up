@@ -41,21 +41,21 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="day" class="form-label-create">Work Day</label>
-                                        <select class="form-control @error('day') is-invalid @enderror" id="day"
-                                            name="day" required>
-                                            <option value="" disabled selected>Select a day</option>
-                                            <option value="Monday">Monday</option>
-                                            <option value="Tuesday">Tuesday</option>
-                                            <option value="Wednesday">Wednesday</option>
-                                            <option value="Thursday">Thursday</option>
-                                            <option value="Friday">Friday</option>
-                                            <option value="Saturday">Saturday</option>
-                                            <option value="Sunday">Sunday</option>
+                                        <select class="form-control @error('day') is-invalid @enderror" id="day" name="day" required>
+                                            <option value="" disabled {{ old('day') ? '' : 'selected' }}>Select a day</option>
+                                            <option value="Monday" {{ old('day') == 'Monday' ? 'selected' : '' }}>Monday</option>
+                                            <option value="Tuesday" {{ old('day') == 'Tuesday' ? 'selected' : '' }}>Tuesday</option>
+                                            <option value="Wednesday" {{ old('day') == 'Wednesday' ? 'selected' : '' }}>Wednesday</option>
+                                            <option value="Thursday" {{ old('day') == 'Thursday' ? 'selected' : '' }}>Thursday</option>
+                                            <option value="Friday" {{ old('day') == 'Friday' ? 'selected' : '' }}>Friday</option>
+                                            <option value="Saturday" {{ old('day') == 'Saturday' ? 'selected' : '' }}>Saturday</option>
+                                            <option value="Sunday" {{ old('day') == 'Sunday' ? 'selected' : '' }}>Sunday</option>
                                         </select>
                                         @error('day')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -77,12 +77,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label-create">Status</label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                            id="phone" name="phone" placeholder="Type driver phone" required
+                                        <input type="text" class="form-control"id="status" name="status" required
                                             value="Active" disabled>
-                                        @error('phone')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
