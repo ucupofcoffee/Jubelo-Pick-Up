@@ -17,7 +17,10 @@ class ScheduleController extends Controller
         $date = Carbon::now()->toDateString();
         $drivers = Driver::where('day', $day)->get();
 
-        $schedule = Schedule::whereDate('pick_up_date', $date)->orderBy('pick_up_time', 'asc')->get();
+        $schedule = Schedule::whereDate('pick_up_date', $date)
+        ->where('status', 2)
+        ->orderBy('pick_up_time', 'asc')
+        ->get();
 
         $pickup1 = $schedule->slice(0, ceil($schedule->count() / 3));
         $pickup2 = $schedule->slice(ceil($schedule->count() / 3), ceil($schedule->count() / 3));

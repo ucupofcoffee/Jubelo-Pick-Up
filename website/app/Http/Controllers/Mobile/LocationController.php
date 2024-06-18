@@ -18,7 +18,5 @@ class LocationController extends Controller
     
         return response()->json(['message' => 'Location saved successfully'], 201);
     }
-    
-    
 }
 

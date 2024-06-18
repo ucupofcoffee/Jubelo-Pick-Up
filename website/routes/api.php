@@ -31,6 +31,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::get('/pickup', [PickUpController::class, 'index']);
 Route::get('/pickup/{scheduleid}', [PickUpController::class, 'detail']);
-Route::put('schedules/{scheduleid}/update', [PickUpController::class, 'update']);
-Route::post('/photo', [PhotoController::class, 'store']);
-Route::post('/location', [LocationController::class, 'store']);
+Route::post('/locations', [LocationController::class, 'store']);
+Route::get('photos/transaction/{transaction_id}', [PhotoController::class, 'getPhotoId']);
+Route::post('/photos', [PhotoController::class, 'store']);
+Route::put('/schedules/updateByTransactionId/{transaction_id}', [PickUpController::class, 'updateByTransactionId']);
+Route::get('/driver', [PickUpController::class, 'getDriverDetails']);
+Route::get('schedules/transaction/{transaction_id}', [PickUpController::class, 'getScheduleIdByTransactionId']);
+

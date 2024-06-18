@@ -20,26 +20,25 @@ class HistoryController extends Controller
 
     public function historyList()
     {
-        $histories = Schedule::all();
+        $histories = Schedule::with('driver')->where('status', 1)->get();
     
         $events = [];
     
         foreach ($histories as $history) {
-            $transactionIds = $history->pluck('transaction_id')->toArray();
             $event = [
                 'title' => $history->transaction_id,
                 'start' => $history->pick_up_date,
                 'end' => $history->pick_up_date,
                 'extendedProps' => [
-                    'transaction_id' => $transactionIds,
-                    
+                    'transaction_id' => $history->transaction_id,
+                    'driver_name' => $history->driver ? $history->driver->name : 'Unknown',
                 ],
             ];
             array_push($events, $event);
         }
     
         return response()->json($events);
-    }
+    }    
 
     public function detail($pick_up_date)
     {

@@ -31,6 +31,7 @@
             var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
             var detailButton = document.getElementById('detailButton');
             var currentEventData = [];
+            var currentDriverName = '';
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 aspectRatio: 1.5,
@@ -45,6 +46,8 @@
                     var clickedDate = info.dateStr;
                     getEventDataForDate(clickedDate, function(eventData) {
                         currentEventData = eventData;
+                        currentDriverName = eventData.length > 0 ? eventData[0].extendedProps
+                            .driver_name : 'Unknown';
                         displayEventData(eventData);
                         eventModal.show();
                     });
@@ -63,7 +66,8 @@
                         console.log('Response from server:', response);
 
                         var filteredTransactions = response.filter(function(transaction) {
-                            var transactionDate = new Date(transaction.start).toISOString().slice(0, 10);
+                            var transactionDate = new Date(transaction.start).toISOString()
+                                .slice(0, 10);
                             return transactionDate === date;
                         });
 
@@ -83,13 +87,20 @@
 
                 if (eventData.length > 0) {
                     var firstEvent = eventData[0];
-                    var eventDate = firstEvent.start ? new Date(firstEvent.start) : firstEvent.end ? new Date(firstEvent.end) : null;
+                    var eventDate = firstEvent.start ? new Date(firstEvent.start) : firstEvent.end ? new Date(
+                        firstEvent.end) : null;
 
                     if (eventDate) {
                         eventDateElement.innerText = "Event Date: " + eventDate.toISOString().slice(0, 10);
                     } else {
                         eventDateElement.innerText = "Event Date: Unknown";
                     }
+
+                    var driverNameElement = document.createElement('p');
+                    driverNameElement.innerText = "Driver: " + currentDriverName;
+                    driverNameElement.style.fontSize = "1rem";
+                    driverNameElement.style.fontWeight = "bold";
+                    eventDateElement.parentNode.insertBefore(driverNameElement, eventDateElement.nextSibling);
 
                     eventData.forEach(function(event) {
                         if (event.title) {
@@ -120,7 +131,9 @@
                 if (currentEventData.length > 0) {
                     var pickUpDate = currentEventData[0].start;
 
-                    window.location.href = "{{ route('history.detail', ['pick_up_date' => ':pick_up_date']) }}".replace(':pick_up_date', pickUpDate);
+                    window.location.href =
+                        "{{ route('history.detail', ['pick_up_date' => ':pick_up_date']) }}".replace(
+                            ':pick_up_date', pickUpDate);
                 }
             });
         });

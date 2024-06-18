@@ -52,13 +52,14 @@ class DriverController extends Controller
             'day' => 'required',
         ]);
 
-        $driver = new Driver();
-        $driver->name = ucwords(strtolower($validatedData['name']));
-        $driver->phone = $validatedData['phone'];
-        $driver->email = $validatedData['email'];
-        if ($validatedData['password']) {
-            $driver->password = Hash::make($validatedData['password']);
-        }
+        $driver = Driver::create([
+            'name' => ucwords(strtolower($validatedData['name'])),
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'status' => $validatedData['status'],
+            'day' => $validatedData['day'],
+        ]);
 
         if ($driver->save()) {
             return redirect()->route('driver.index')->with('success', 'Driver created successfully');
@@ -94,9 +95,7 @@ class DriverController extends Controller
         $driver->name = ucwords(strtolower($validatedData['name']));
         $driver->phone = $validatedData['phone'];
         $driver->email = $validatedData['email'];
-        if ($validatedData['password']) {
-            $driver->password = Hash::make($validatedData['password']);
-        }
+        $driver->password = Hash::make($validatedData['password']);
 
         if ($driver->save()) {
             return redirect()->route('driver.index')->with('success', 'Driver updated successfully');
@@ -112,9 +111,9 @@ class DriverController extends Controller
         if ($driver) {
             $driver->status = 'Deadactive';
             if ($driver->save()) {
-                return redirect()->back()->with('success', 'Driver status updated to deadactive successfully');
+                return redirect()->back()->with('success', 'Driver deleted successfully');
             } else {
-                return redirect()->back()->with('error', 'Failed to update Driver status. Please try again');
+                return redirect()->back()->with('error', 'Failed to delete Driver. Please try again');
             }
         } else {
             return redirect()->back()->with('error', 'Driver not found');

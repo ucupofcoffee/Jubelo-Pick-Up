@@ -55,7 +55,6 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -76,9 +75,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="phone" class="form-label-create">Status</label>
-                                        <input type="text" class="form-control"id="status" name="status" required
-                                            value="Active" disabled>
+                                        <label for="status" class="form-label-create">Status</label>
+                                        <input type="text" class="form-control" id="status" name="status" value="Active" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
