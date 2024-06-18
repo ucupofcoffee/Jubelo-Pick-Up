@@ -2,7 +2,83 @@
 
 @section('content')
     @include('layouts.headers.cards')
+    <script src="https://www.googleapis.com/maps/api/js?key=AIzaSyCyVSNnBSC2inE88KAJEuFNWbtlSyvSbTg&callback=initMap"></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: new google.maps.LatLng(-6.92222000, 107.60694000),
+                zoom:11
+            });
 
+            var initialMarker = {
+                lat: -6.92222000,
+                lng: 107.60694000
+            };
+            
+            var initialMarkerIcon = {
+                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            };
+            
+            addMarker(initialMarker, map, 'Initial Location', initialMarkerIcon);
+
+            var locations = @json($locations);
+
+            locations.forEach(function(location, index) {
+                var marker = {
+                    lat: parseFloat(location.latitude),
+                    lng: parseFloat(location.longitude)
+                };
+                addMarker(marker, map, 'Location ' + (index + 1));
+            });
+
+            var firstLocation = {
+                lat: parseFloat(locations[0].latitude),
+                lng: parseFloat(locations[0].longitude)
+            };
+            var secondLocation = {
+                lat: parseFloat(locations[1].latitude),
+                lng: parseFloat(locations[1].longitude)
+            };
+            var thirdLocation = {
+                lat: parseFloat(locations[2].latitude),
+                lng: parseFloat(locations[2].longitude)
+            };
+
+            drawRoute(initialMarker, firstLocation, map);
+            drawRoute(firstLocation, secondLocation, map);
+            drawRoute(firstLocation, thirdLocation, map);
+        }
+
+        function addMarker(marker, map, title = '', icon = null) {
+            new google.maps.Marker({
+                position: marker,
+                map: map,
+                title: title,
+                icon: icon
+            });
+        }
+
+        function drawRoute(origin, destination, map) {
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            var request = {
+                origin: new google.maps.LatLng(origin.lat, origin.lng),
+                destination: new google.maps.LatLng(destination.lat, destination.lng),
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12">
@@ -66,25 +142,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        var map = L.map('map').setView([-6.2088, 106.8456], 12);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        var pathCoordinates = [
-            [-6.2088, 106.8456],
-            [-6.1754, 106.8272],
-            [-6.1932, 106.8490],
-            [-6.2325, 106.8265]
-        ];
-
-        var polyline = L.polyline(pathCoordinates, {
-            color: 'red'
-        }).addTo(map);
-        map.fitBounds(polyline.getBounds());
-    </script>
-
 @endsection

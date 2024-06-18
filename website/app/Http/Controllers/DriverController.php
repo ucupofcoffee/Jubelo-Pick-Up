@@ -89,6 +89,7 @@ class DriverController extends Controller
             'phone' => 'required|unique:drivers,phone,'.$driverid.',driverid',
             'email' => 'required|email:rfc,dns|unique:drivers,email,'.$driverid.',driverid',
             'password' => 'nullable|min:8|max:255',
+            'day' => 'required'
         ]);
 
         $driver = Driver::find($driverid);
@@ -96,6 +97,7 @@ class DriverController extends Controller
         $driver->phone = $validatedData['phone'];
         $driver->email = $validatedData['email'];
         $driver->password = Hash::make($validatedData['password']);
+        $driver->day = $validatedData['day'];
 
         if ($driver->save()) {
             return redirect()->route('driver.index')->with('success', 'Driver updated successfully');

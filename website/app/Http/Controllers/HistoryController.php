@@ -63,15 +63,28 @@ class HistoryController extends Controller
             return $item;
         });
 
+        $locations = $histories->map(function($item) {
+            return [
+                'latitude' => $item->latitude,
+                'longitude' => $item->longitude
+            ];
+        });
+
         return view('history.detail', [
             'title' => 'History Detail',
             'histories' => $histories,
             'pickup1' => $pickup1,
             'pickup2' => $pickup2,
             'pickup3' => $pickup3,
+            'locations' => $locations
         ]);
     }
 
+    public function getLocations()
+    {
+        $locations = Schedule::select('latitude', 'longitude')->get();
+        return response()->json($locations);
+    }
     private function convertPickUpTime($time)
     {
         switch ($time) {
